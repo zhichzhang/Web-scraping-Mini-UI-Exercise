@@ -7,7 +7,6 @@
 - **Install dependencies**:
 
 ```shell
-# If you have requirements.txt
 pip install -r requirements.txt
 ```
 
