@@ -1,0 +1,65 @@
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environment
+.env/
+.venv/
+env/
+venv/
+ENV/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+.DS_Store
+
+# Byte-compiled / cache
+.pytest_cache/
+.mypy_cache/
+coverage/
+htmlcov/
+.tox/
+
+# ----------------------------
+# Data
+# ----------------------------
+# Exclude generated data folders and files
+data/
+!data/.gitkeep  # Keep placeholder if needed
+
+# ----------------------------
+# IDE & Editor
+# ----------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ----------------------------
+# OS Files
+# ----------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ----------------------------
+# Node / Frontend (if UI included in same repo)
+# ----------------------------
+node_modules/
+dist/
+*.lock
