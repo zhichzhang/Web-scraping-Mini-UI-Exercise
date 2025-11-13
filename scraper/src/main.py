@@ -127,7 +127,7 @@ def save_dataset(dataset, path):
         raise
 
     try:
-        items_path = Path("data/items.jsonl")
+        items_path = Path("src/data/items.jsonl")
         items_path.parent.mkdir(parents=True, exist_ok=True)
         items = getattr(dataset, "items", [])
         with items_path.open("w", encoding="utf-8") as f:
