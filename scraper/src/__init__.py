@@ -36,7 +36,7 @@ from .robots import can_fetch
 # ----------------------------
 # Types
 # ----------------------------
-from .types import (
+from .data_types import (
     BookItem,
     QuoteItem,
     AuthorDetails,

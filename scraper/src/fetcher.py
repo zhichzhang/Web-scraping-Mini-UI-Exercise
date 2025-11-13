@@ -10,8 +10,8 @@ import time
 
 from tqdm import tqdm
 
-from src.robots import can_fetch
-from src.pagination import get_books_category_next_page_url, get_quotes_next_page_url
+from robots import can_fetch
+from pagination import get_books_category_next_page_url, get_quotes_next_page_url
 
 visited = set()
 visited_lock = threading.Lock()

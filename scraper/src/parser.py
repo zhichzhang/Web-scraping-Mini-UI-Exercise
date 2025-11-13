@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import uuid
 
-from src.robots import can_fetch
-from src.types import BookItem, QuoteItem, AuthorDetails
+from robots import can_fetch
+from data_types import BookItem, QuoteItem, AuthorDetails
 import re
 
 _id_lock = threading.Lock()

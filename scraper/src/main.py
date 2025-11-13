@@ -1,9 +1,9 @@
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from src import fetch_all_books_parallel, fetch_all_quotes_pages_parallel
-from src import parse_book_page, parse_quotes_from_a_page
-from src import BookItem, SummaryData, CategoryCount, RatingCount, Dataset, MetaInfo, Filters, QuoteItem, TagCount, AuthorCount
+from fetcher import fetch_all_books_parallel, fetch_all_quotes_pages_parallel
+from parser import parse_book_page, parse_quotes_from_a_page
+from data_types import BookItem, SummaryData, CategoryCount, RatingCount, Dataset, MetaInfo, Filters, QuoteItem, TagCount, AuthorCount
 import json
 from pathlib import Path
 from datetime import datetime, timezone
@@ -132,8 +132,8 @@ def save_dataset(dataset, path):
 
 def main():
     output_path = get_output_path()
-    books = fetch_and_parse_books(limit=None)
-    quotes = fetch_and_parse_quotes_pages(limit=None)
+    books = fetch_and_parse_books(limit=2)
+    quotes = fetch_and_parse_quotes_pages(limit=2)
     dataset = build_dataset(books, quotes)
     save_dataset(dataset, output_path)
 
