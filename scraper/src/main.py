@@ -14,7 +14,7 @@ def log(msg):
 
 def get_output_path():
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    path = Path(f"data/{timestamp}/dataset.json")
+    path = Path(f"src/data/{timestamp}/dataset.json")
     path.parent.mkdir(parents=True, exist_ok=True)
     return path
 
@@ -23,7 +23,7 @@ def fetch_and_parse_books(max_workers=10, limit=None):
     log("Fetching book URLs...")
     book_pages_dict = fetch_all_books_parallel(max_workers)
 
-    urls_to_parse = []  # list of (url, category)
+    urls_to_parse = []
     for category, urls in book_pages_dict.items():
         for url in urls:
             urls_to_parse.append((url, category))
@@ -117,17 +117,27 @@ def build_dataset(books, quotes=None):
 
 
 def save_dataset(dataset, path):
-    with path.open("w", encoding="utf-8") as f:
-        json.dump(dataset, f, default=lambda o: o.__dict__, ensure_ascii=False, indent=2)
-    log(f"Saved dataset to {path}")
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("w", encoding="utf-8") as f:
+            json.dump(dataset, f, default=lambda o: o.__dict__, ensure_ascii=False, indent=2)
+        log(f"Saved dataset to {path}")
+    except Exception as e:
+        log(f"Error saving dataset JSON: {e}")
+        raise
 
-    items_path = Path("data/items.jsonl")
-    items = getattr(dataset, "items", [])
+    try:
+        items_path = Path("data/items.jsonl")
+        items_path.parent.mkdir(parents=True, exist_ok=True)
+        items = getattr(dataset, "items", [])
+        with items_path.open("w", encoding="utf-8") as f:
+            for item in items:
+                f.write(json.dumps(item, default=lambda o: o.__dict__, ensure_ascii=False) + "\n")
+        log(f"Saved {len(items)} items to {items_path}")
+    except Exception as e:
+        log(f"Error saving items.jsonl: {e}")
+        raise
 
-    with items_path.open("w", encoding="utf-8") as f:
-        for item in items:
-            f.write(json.dumps(item, default=lambda o: o.__dict__, ensure_ascii=False) + "\n")
-    log(f"Saved {len(items)} items to {items_path}")
 
 
 def main():
